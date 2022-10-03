@@ -17,24 +17,15 @@ const sql = `INSERT INTO people(name) values('Rodolfo')`
 connection.query(sql)
 
 app.get('/', (_req, res) => {
-
     let lisPeople = '<p><h1>Full Cycle Rocks!</h1></p>'
     lisPeople += '<p>- Lista de nomes cadastrada no banco de dados.</p>'
 
-    connection.query(`SELECT * FROM PEOPLE`, (err, result, fields) => {
+    connection.query(`SELECT * FROM PEOPLE`, (_err, result, _fields) => {
         lisPeople += '<ul>'
-        
-        result.forEach(people => {
-            lisPeople += `<li>${people.name}</li>`
-        });
-        
+        result.forEach(people => lisPeople += `<li>${people.name}</li>`);
         lisPeople += '</ul>'
-
-
-        console.log(result);
         res.send(lisPeople)
     })
-
 })
 
 app.listen(port, () => console.log(`Rodando na porta ${port}`))
