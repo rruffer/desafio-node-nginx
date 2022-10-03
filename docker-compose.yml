@@ -26,8 +26,8 @@ services:
     command: --lower_case_table_names=1
     healthcheck:
       test: "mysql -uroot -proot --execute \"SHOW DATABASES;\""
-      interval: 3s
-      timeout: 1s
+      interval: 10s
+      timeout: 5s
       retries: 5
     networks:
       - node-network
