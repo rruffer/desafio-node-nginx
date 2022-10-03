@@ -4,7 +4,8 @@ USER node
 
 WORKDIR /home/node/app
 
-COPY . .
+COPY ./src /home/node/app
+COPY package.json /home/node/app
 
 EXPOSE 3000
 

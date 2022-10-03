@@ -3,15 +3,12 @@ version: '3'
 networks:
   node-network:
     driver: bridge
-    # external: true
 
 services:
   node:
     build: ./node
-    # build:
-    #   context: ./node
-    #   dockerfile: Dockerfile
     image: rruffer/node-app
+    container_name: node-app
     # ports:
     #   - 3000:3000
     volumes:
@@ -23,12 +20,12 @@ services:
         condition: service_healthy
   mysql:
     image: mysql:8.0.30
+    container_name: node-db
     cap_add:
       - SYS_NICE
     ports:
       - 3306:3306
     volumes:
-    #  - ./mysql/dbdata:/var/lib/mysql
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --lower_case_table_names=1
     healthcheck:
@@ -44,6 +41,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
   nginx:
     image: nginx:1.23.1-alpine
+    container_name: nginx-server
     ports:
       - 8080:80
     volumes:
