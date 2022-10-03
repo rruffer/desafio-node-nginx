@@ -9,10 +9,6 @@ services:
     build: ./node
     image: rruffer/node-app
     container_name: node-app
-    # ports:
-    #   - 3000:3000
-    volumes:
-      - ./node:/usr/src/app
     networks:
       - node-network
     depends_on: # https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on
